@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.opentmf.commons</groupId>
   <artifactId>opentmf-json-patch</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>opentmf-json-patch</name>
 
   <description>
@@ -213,7 +211,7 @@
     <url>https://github.com/opentmf/opentmf-json-patch</url>
     <connection>scm:git:git@github.com:opentmf/opentmf-json-patch.git</connection>
     <developerConnection>scm:git:git@github.com:opentmf/opentmf-json-patch.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>opentmf-json-patch-1.0.0</tag>
   </scm>
 
   <profiles>
