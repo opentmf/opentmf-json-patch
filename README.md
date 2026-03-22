@@ -1,17 +1,16 @@
 # opentmf-json-patch
 
-A lightweight, Jackson 3-native [RFC 6902](https://datatracker.ietf.org/doc/html/rfc6902) JSON Patch library for Java 17+.
+A lightweight, Jackson 3-native JSON patching library for Java 17+, supporting both [RFC 6902 — JSON Patch](https://datatracker.ietf.org/doc/html/rfc6902) and [RFC 7396 — JSON Merge Patch](https://datatracker.ietf.org/doc/html/rfc7396).
 
-Provides a **fluent builder**, **JSON parsing**, and a **patch application engine** -- a complete replacement for `com.github.fge:json-patch` in Spring Boot 4.x / Jackson 3.x projects.
+A complete replacement for `com.github.fge:json-patch` in Spring Boot 4.x / Jackson 3.x projects.
 
 ## Why?
 
 The widely-used `com.github.fge:json-patch` (and `com.github.java-json-tools:json-patch`) libraries depend on Jackson 2.x and are not compatible with Jackson 3.x. Since Spring Boot 4.x uses Jackson 3.x by default, a new solution is needed.
 
 This library provides:
-- A **fluent builder** for constructing RFC 6902 patch documents
-- A **`fromJson(String)`** factory for parsing JSON Patch strings directly
-- A **patch application engine** that applies RFC 6902 operations to `JsonNode` documents with full atomicity guarantees
+- **JSON Patch (RFC 6902)** — a fluent builder, JSON parsing, and an atomic patch application engine for operation-based patches (`add`, `remove`, `replace`, `move`, `copy`, `test`)
+- **JSON Merge Patch (RFC 7396)** — parse and apply document-based merge patches where fields are set, removed (via `null`), or recursively merged
 
 ## Maven
 
@@ -110,7 +109,47 @@ JsonPatch.builder()
     .build();
 ```
 
-## Supported Operations
+## JSON Merge Patch (RFC 7396)
+
+JSON Merge Patch is a simpler alternative to JSON Patch. Instead of an array of operations, you send a partial JSON document describing the desired changes:
+
+```java
+import org.opentmf.commons.patch.JsonMergePatch;
+
+// Parse a merge patch
+JsonMergePatch patch = JsonMergePatch.fromJson(
+    "{\"age\":31, \"email\":null, \"city\":\"Berlin\"}");
+
+// Apply it — returns a new document; original is unchanged
+JsonNode patched = patch.apply(originalDocument);
+```
+
+The merge semantics are:
+- **Present field with a value** → set or replace
+- **Field set to `null`** → remove
+- **Nested objects** → merge recursively
+- **Arrays** → replaced entirely (not merged element-wise)
+- **Absent fields** → left untouched
+
+### Sending over HTTP
+
+```java
+webClient.patch()
+    .uri("/api/resources/{id}", id)
+    .contentType(MediaType.valueOf("application/merge-patch+json"))
+    .bodyValue(patch.toJsonNode())
+    .retrieve()
+    .bodyToMono(Resource.class);
+```
+
+### Static convenience
+
+```java
+JsonNode patchNode = mapper.readTree("{\"name\":\"Bob\"}");
+JsonNode patched = JsonMergePatch.apply(patchNode, originalDocument);
+```
+
+## JSON Patch — Supported Operations
 
 All six [RFC 6902](https://datatracker.ietf.org/doc/html/rfc6902) operations:
 

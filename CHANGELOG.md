@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [1.0.0] — Unreleased
+## [1.1.0] — 2026-03-22
+
+### Added
+- **JSON Merge Patch (RFC 7396)** — new `JsonMergePatch` class for document-based merge patching.
+  Fields present with a value are set/replaced, fields set to `null` are removed, nested objects
+  are merged recursively, and arrays are replaced entirely (per the RFC). Factory methods
+  `of(JsonNode)` and `fromJson(String)`, instance and static `apply()` methods, and full Javadoc.
+
+## [1.0.0]
 
 Initial release of `opentmf-json-patch`, a lightweight, Jackson 3-native RFC 6902 JSON Patch library.
 
@@ -25,7 +33,6 @@ Initial release of `opentmf-json-patch`, a lightweight, Jackson 3-native RFC 690
   (root) or start with `/`.
 - **Immutable patches** — `build()` returns a snapshot; subsequent builder modifications do not
   affect previously built patches.
-- **100% test coverage** — 128 tests covering all classes, lines, instructions, and branches,
-  enforced by JaCoCo.
+- **100% test coverage** — enforced by JaCoCo.
 - **Release profile** — Maven source, Javadoc, GPG signing, and Central Publishing plugins
   configured for release to Maven Central.

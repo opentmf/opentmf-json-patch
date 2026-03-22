@@ -4,11 +4,11 @@
 
   <groupId>org.opentmf.commons</groupId>
   <artifactId>opentmf-json-patch</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
   <name>opentmf-json-patch</name>
 
   <description>
-    Jackson 3-native RFC 6902 JSON Patch library (builder + application).
+    Jackson 3-native JSON Patch library supporting RFC 6902 (JSON Patch) and RFC 7396 (JSON Merge Patch).
     A complete replacement for com.github.fge:json-patch for Spring Boot 4.x / Jackson 3.x projects.
   </description>
 
