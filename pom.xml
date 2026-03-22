@@ -4,7 +4,7 @@
 
   <groupId>org.opentmf.commons</groupId>
   <artifactId>opentmf-json-patch</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
   <name>opentmf-json-patch</name>
 
   <description>
@@ -211,7 +211,7 @@
     <url>https://github.com/opentmf/opentmf-json-patch</url>
     <connection>scm:git:git@github.com:opentmf/opentmf-json-patch.git</connection>
     <developerConnection>scm:git:git@github.com:opentmf/opentmf-json-patch.git</developerConnection>
-    <tag>opentmf-json-patch-1.0.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <profiles>
